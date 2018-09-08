@@ -3,7 +3,7 @@
     <Box padded>
       <Box horizontal padded>
         <TextInput v-model="query" stretchy></TextInput>
-        <Button !enabled="!query">Search</Button>
+        <Button !enabled="!!query">Search</Button>
       </Box>
     </Box>
   </Window>
