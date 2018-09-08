@@ -27,7 +27,24 @@ export default {
   methods: {
     exit() {
       this.$exit();
-    }
+    },
+    showWeather() {
+      axios.get(
+      	`/weather?q=${this.query}&units=metric&&appid=${apiKey}`,
+      ).then(response => {
+        this.city = response.data.name;
+        this.country = response.data.sys.country;
+        this.weatherDescription = response.data.weather[0].description;
+        this.temp = response.data.main.temp;
+        this.tempMin = response.data.main.temp_min;
+        this.tempMax = response.data.main.temp_max;
+        this.humidity = response.data.main.humidity;
+        this.error = false;
+      }).catch(() => {
+        this.error = true;
+        this.city = '';
+      });
+    },
   }
 }
 </script>
