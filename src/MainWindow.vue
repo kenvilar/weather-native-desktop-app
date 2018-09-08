@@ -11,6 +11,19 @@
 
 <script>
 export default {
+  data () {
+    return {
+      query: '',
+      error: false,
+      city: '',
+      country: '',
+      weatherDescription: '',
+      temp: null,
+      tempMin: null,
+      tempMax: null,
+      humidity: null,
+    };
+  },
   methods: {
     exit() {
       this.$exit();
