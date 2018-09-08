@@ -3,7 +3,7 @@
     <Box padded>
       <Box horizontal padded>
         <TextInput v-model="query" stretchy></TextInput>
-        <Button !enabled="!!query" @click="showMyWeather" placeholder="Search a city...">Search</Button>
+        <Button :enabled="!!query" @click="showMyWeather" placeholder="Search a city...">Search</Button>
       </Box>
       <Separator horizontal />
       <Group margined>
