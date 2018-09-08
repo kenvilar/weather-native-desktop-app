@@ -3,13 +3,13 @@
     <Box padded>
       <Box horizontal padded>
         <TextInput v-model="query" stretchy></TextInput>
-        <Button :enabled="!!query" @click="showMyWeather" placeholder="Search a city...">Search</Button>
+        <Button :enabled="!!query" @click="showMyWeather">Search</Button>
       </Box>
       <Separator horizontal />
       <Group margined>
         <Box padded>
           <Text v-if="error">There is no such city in the database</Text>
-          <Box v-if="!!city">
+          <Box v-if="!!kencity">
             <Box padded horizontal>
               <Text stretchy>{{ kencity }}, {{ kencountry }}</Text>
               <Text>{{ kentemp }}&deg;C</Text>
@@ -29,6 +29,12 @@
 </template>
 
 <script>
+
+require('dotenv').config();
+import axios from 'axios';
+axios.defaults.baseURL = 'https://api.openweathermap.org/data/2.5';
+const openWeatherMapApiKey = process.env.OPENWEATHERMAP_API_KEY;
+
 export default {
   data () {
     return {
@@ -49,7 +55,7 @@ export default {
     },
     showMyWeather() {
       axios.get(
-      	`/weather?q=${this.query}&units=metric&&appid=${_apiKey}`,
+      	`/weather?q=${this.query}&units=metric&&appid=${openWeatherMapApiKey}`,
       ).then(response => {
         this.kencity = response.data.name;
         this.kencountry = response.data.sys.country;
